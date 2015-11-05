@@ -1,0 +1,36 @@
+{
+	"version": 0,
+	"dependencies": [
+		{
+			"importpath": "github.com/gizak/termui",
+			"repository": "https://github.com/gizak/termui",
+			"revision": "a302a528a807232d794aabb0479ab14a6ac601a8",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/gorilla/websocket",
+			"repository": "https://github.com/gorilla/websocket",
+			"revision": "361d4c0ffd78338ebe0a9e6320cdbe115d7dc026",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/mattn/go-runewidth",
+			"repository": "https://github.com/mattn/go-runewidth",
+			"revision": "12e0ff74603c9a3209d8bf84f8ab349fe1ad9477",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/nsf/termbox-go",
+			"repository": "https://github.com/nsf/termbox-go",
+			"revision": "010a5510e416cf7283b3a426d19e315ce84fd23f",
+			"branch": "master"
+		},
+		{
+			"importpath": "golang.org/x/net/websocket",
+			"repository": "https://go.googlesource.com/net",
+			"revision": "b4e17d61b15679caf2335da776c614169a1b4643",
+			"branch": "master",
+			"path": "/websocket"
+		}
+	]
+}
