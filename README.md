@@ -1,22 +1,30 @@
 
 # River: A WS debug client
 
+# Installation (source)
+
+You can't `go get` this package; I use `gb` instead. If you already have that, skip the first step.
+
+```
+go get github.com/constabulary/gb/...
+git clone http://github.com/mhoc/river
+cd river
+gb build
+./bin/main (wsurl)
+```
+
+You can, of course, move and rename that main binary into your $PATH.
+
+# Installation (binary)
+
+I've pre-built an OSX binary for you if you prefer. Check under "releases".
+
 # Usage
 
 ```
-river wsurl
+river (wsurl)
 ```
 
 # Commands
 
 `/json`: Enables and disables easy json parsing so things like `id:5 name:michael` will send `{"id":5,"name":"michael"}`. Its pretty basic right now.
-
-# Improvements
-
-Right now its a three stage pipeline which looks like `Sending -> WsHandler -> Receiving`.
-
-I'd like to factor this into a four stage pipeline to clean up the command handling code s.t. `Sending -> MsgHandler -> WsHandler -> Receiving`.
-
-The easy json part needs to be improved as well. It is very very basic.
-
-Simplifying URLs so you don't need the ws:// in the front would also be nice.
