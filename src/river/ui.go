@@ -24,7 +24,8 @@ func BuildUI() {
   })
 
   ui.Handle("/timer/1s", func(e ui.Event) {
-    receiveBox.Height = ui.TermHeight() - SendBoxHeight
+    // ReceiveBoxHeight = ui.TermHeight() - SendBoxHeight
+    // receiveBox.Height = ReceiveBoxHeight
     ui.Body.Align()
     ui.Render(ui.Body)
   })

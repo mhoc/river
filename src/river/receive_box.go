@@ -9,11 +9,13 @@ import (
 
 var (
   NItems = 0
+  ReceiveBoxHeight = 50
 )
 
 func CreateReceiveBox() *ui.Par {
   p := ui.NewPar("")
-  p.Height = ui.TermHeight() - SendBoxHeight
+  // p.Height = ui.TermHeight() - SendBoxHeight
+  p.Height = ReceiveBoxHeight
   p.TextFgColor = ui.ColorWhite
   p.BorderFg = ui.ColorCyan
   go ReadReceives(p)
@@ -23,7 +25,7 @@ func CreateReceiveBox() *ui.Par {
 func ReadReceives(p *ui.Par) {
   for {
     NItems += 1
-    if NItems >= ui.TermHeight() - SendBoxHeight {
+    if NItems >= ReceiveBoxHeight {
       ScrollReceiveBox(p)
     }
     msg := <-Display
