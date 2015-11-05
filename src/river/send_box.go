@@ -29,11 +29,27 @@ func SendBoxEvents(SendBox *ui.Par) {
         Message: SendBox.Text[1:],
       }
     } else {
-      Receives <- ConsoleMsg{
-        Type: SENDING,
-        Message: SendBox.Text,
+      if EnableJSONParsing {
+        m, err := ParseEasyJSONString(SendBox.Text)
+        if err != nil {
+          Receives <- ConsoleMsg{
+            Type: ERROR,
+            Message: "Illformatted easy json body",
+          }
+        } else {
+          Receives <- ConsoleMsg{
+            Type: SENDING,
+            Message: m,
+          }
+          Submissions <- m
+        }
+      } else {
+        Receives <- ConsoleMsg{
+          Type: SENDING,
+          Message: SendBox.Text,
+        }
+        Submissions <- SendBox.Text
       }
-      Submissions <- SendBox.Text
     }
     SendBox.Text = ""
     ui.Render(ui.Body)
