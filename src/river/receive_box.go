@@ -7,17 +7,13 @@ import (
   ui "github.com/gizak/termui"
 )
 
-const (
-  ReceiveBoxHeight = 50
-)
-
 var (
   NItems = 0
 )
 
 func CreateReceiveBox() *ui.Par {
   p := ui.NewPar("")
-  p.Height = ReceiveBoxHeight
+  p.Height = ui.TermHeight() - SendBoxHeight
   p.TextFgColor = ui.ColorWhite
   p.BorderFg = ui.ColorCyan
   go ReadReceives(p)
@@ -27,7 +23,7 @@ func CreateReceiveBox() *ui.Par {
 func ReadReceives(p *ui.Par) {
   for {
     NItems += 1
-    if NItems >= ReceiveBoxHeight {
+    if NItems >= ui.TermHeight() - SendBoxHeight {
       ScrollReceiveBox(p)
     }
     msg := <-Display

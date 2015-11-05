@@ -24,9 +24,18 @@ func BuildUI() {
   })
 
   ui.Handle("/timer/1s", func(e ui.Event) {
+    receiveBox.Height = ui.TermHeight() - SendBoxHeight
     ui.Body.Align()
     ui.Render(ui.Body)
   })
+
+  // Leaving this commented out for now
+  // I'd like to get this method of screen refreshing working instead of the 1s method,
+  // but this crashes on resize.
+  // ui.Handle("/sys/wnd/resize", func(e ui.Event) {
+  //   ui.Body.Align()
+  //   ui.Render(ui.Body)
+  // })
 
   ui.Loop()
 }

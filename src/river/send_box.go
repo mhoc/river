@@ -5,10 +5,13 @@ import (
   ui "github.com/gizak/termui"
 )
 
+const (
+  SendBoxHeight = 3
+)
+
 func CreateSendBox() *ui.Par {
   p := ui.NewPar("")
-  p.Height = 3
-  p.Width = 50
+  p.Height = SendBoxHeight
   p.TextFgColor = ui.ColorWhite
   p.BorderLabel = "Send"
   p.BorderFg = ui.ColorCyan
