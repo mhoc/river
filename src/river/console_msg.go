@@ -6,6 +6,7 @@ type ConsoleMsgType int
 const (
   SENDING ConsoleMsgType = iota
   RECEIVING ConsoleMsgType = iota
+  COMMAND ConsoleMsgType = iota
   ERROR ConsoleMsgType = iota
 )
 

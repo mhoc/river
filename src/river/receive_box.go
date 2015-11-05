@@ -38,6 +38,9 @@ func ReadReceives(p *ui.Par) {
       p.Text += fmt.Sprintf(" <- %v\n", msg.Message)
     } else if msg.Type == ERROR {
       p.Text += fmt.Sprintf(" !! %v\n", msg.Message)
+    } else if msg.Type == COMMAND {
+      p.Text += fmt.Sprintf(" <> %v\n", msg.Message)
+      DispatchCommand(p.Text)
     }
     ui.Render(ui.Body)
   }

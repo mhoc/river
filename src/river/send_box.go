@@ -23,10 +23,17 @@ func CreateSendBox() *ui.Par {
 func SendBoxEvents(SendBox *ui.Par) {
 
   ui.Handle("/sys/kbd/<enter>", func(e ui.Event) {
-    Submissions <- SendBox.Text
-    Receives <- ConsoleMsg{
-      Type: SENDING,
-      Message: SendBox.Text,
+    if SendBox.Text[0] == '/' {
+      Receives <- ConsoleMsg{
+        Type: COMMAND,
+        Message: SendBox.Text[1:],
+      }
+    } else {
+      Receives <- ConsoleMsg{
+        Type: SENDING,
+        Message: SendBox.Text,
+      }
+      Submissions <- SendBox.Text
     }
     SendBox.Text = ""
     ui.Render(ui.Body)
