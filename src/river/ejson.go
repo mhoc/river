@@ -2,6 +2,7 @@ package river
 
 import (
   "encoding/json"
+  "fmt"
   "strconv"
   "strings"
 )
@@ -17,6 +18,9 @@ func ParseEasyJSONString(st string) (string, error) {
   sp := strings.Split(st, " ")
   for _, kv := range sp {
     kvsp := strings.Split(kv, ":")
+    if len(kvsp) < 2 {
+      return "", fmt.Errorf("River couldn't parse your input as EJSON")
+    }
     data[kvsp[0]] = ParseValueType(kvsp[1])
   }
   b, err := json.Marshal(data)

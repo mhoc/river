@@ -9,12 +9,12 @@ import (
 )
 
 func RunWebsocket(host string) {
-  u, err := url.Parse(host)
+  u, err := FormatHost(host)
   if err != nil {
     fmt.Printf("Hostname provided is not formatted properly\n")
     os.Exit(1)
   }
-  conn, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
+  conn, _, err := websocket.DefaultDialer.Dial(u, nil)
   if err != nil {
     fmt.Printf("Error connecting to websocket client\n")
     fmt.Printf("%v\n", err.Error())
@@ -24,15 +24,21 @@ func RunWebsocket(host string) {
   go WsReader(conn)
 }
 
+func FormatHost(hostname string) (string, error) {
+  if hostname[:6] != "ws://" {
+    hostname = "ws://" + hostname
+  }
+  u, err := url.Parse(hostname)
+  return u.String(), err
+}
+
 func WsWriter(c *websocket.Conn) {
   for {
-    msg := <-Submissions
+    msg := <-SendToServer
+    Display <- NewConsoleMsg(SENDING, msg)
     err := c.WriteMessage(websocket.TextMessage, []byte(msg))
     if err != nil {
-      Receives <- ConsoleMsg{
-        Type: ERROR,
-        Message: err.Error(),
-      }
+      Display <- NewConsoleMsg(ERROR, err.Error())
     }
   }
 }
@@ -41,15 +47,9 @@ func WsReader(c *websocket.Conn) {
   for {
     _, msg, err := c.ReadMessage()
     if err != nil {
-      Receives <- ConsoleMsg{
-        Type: ERROR,
-        Message: err.Error(),
-      }
+      Display <- NewConsoleMsg(ERROR, err.Error())
     } else {
-      Receives <- ConsoleMsg{
-        Type: RECEIVING,
-        Message: string(msg),
-      }
+      Display <- NewConsoleMsg(RECEIVING, string(msg))
     }
   }
 }

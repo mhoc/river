@@ -16,5 +16,7 @@ func main() {
   }
   hostname := os.Args[1]
   river.RunWebsocket(hostname)
+  river.CommandHandler()
+  river.CommandExecuter()
   river.BuildUI()
 }

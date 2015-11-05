@@ -13,7 +13,6 @@ const (
 
 var (
   NItems = 0
-  Receives = make(chan ConsoleMsg, 10)
 )
 
 func CreateReceiveBox() *ui.Par {
@@ -31,7 +30,7 @@ func ReadReceives(p *ui.Par) {
     if NItems >= ReceiveBoxHeight {
       ScrollReceiveBox(p)
     }
-    msg := <-Receives
+    msg := <-Display
     if msg.Type == SENDING {
       p.Text += fmt.Sprintf(" -> %v\n", msg.Message)
     } else if msg.Type == RECEIVING {
@@ -40,7 +39,6 @@ func ReadReceives(p *ui.Par) {
       p.Text += fmt.Sprintf(" !! %v\n", msg.Message)
     } else if msg.Type == COMMAND {
       p.Text += fmt.Sprintf(" <> %v\n", msg.Message)
-      DispatchCommand(p.Text)
     }
     ui.Render(ui.Body)
   }
