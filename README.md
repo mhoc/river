@@ -1,6 +1,8 @@
 
 # River: A WS debug client
 
+![](http://i.imgur.com/iJxkJfP.jpg)
+
 # Installation (source)
 
 You can't `go get` this package; I use `gb` instead. If you already have that, skip the first step.
@@ -24,6 +26,8 @@ I've pre-built an OSX binary for you if you prefer. Check under "releases".
 ```
 river (wsurl)
 ```
+
+You can exit `river` using `C-x`.
 
 # Commands
 
